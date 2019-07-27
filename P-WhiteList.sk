@@ -1,0 +1,271 @@
+#版本:v0.1
+#作者:0ojixueseno0
+#做的不好请多担待,感谢
+options:
+	!km6o: k
+	p!tkh: m
+	wf6u^: j
+	6nl6m: n
+	0u2sp: h
+	8o3jp: b
+	140jd: g
+	WlhAw: t
+	0*T43: r
+	TOBHl: e
+	XusQc: .
+	50qvs: /
+	xnI94: $
+	iQZPJ: *
+	nJKhd: !
+	$r8y4: ,
+	mlqu1: s
+	7Jn$3: R
+	BPgxy: q
+	4MV0Y: z
+	2kOIM: a
+	xK6pu: p
+	*m9b!: ;
+	ptbrm./!eszka$n*jRg,q;h: !nej;/rt*km$,pb.ghqRsza
+	asbt!epg.hzqR;rjn*k$,/m: .*g$rspj/nhtz,mbqe!;Rak
+	h,n/!kzr.mb*$Rqseg;pjat: g!,bnz;.Rkha*trjseq/$mp
+	.nskhgRt/jbaemqp!r;$*,z: n.pahzgts/;$!,Rbmjr*keq
+	!ea/;.tkzq,mp*gh$brjsnR: pj.tzhm;R*bg!as$q,enk/r
+	*sqgehb;.mankR!t,p$/rzj: *bj/qrn!.az$Rktmh;e,gps
+on load:
+	send "&6=======================================================" to console
+	send "&b__________           __      __.____     " to console
+	send "&b\______   \         /  \    /  \    |    " to console
+	send "&b |     ___/  ______ \   \/\/   /    |    " to console
+	send "&b |    |     /_____/  \        /|    |___ " to console
+	send "&b |____|               \__/\  / |_______ \" to console
+	send "&b                           \/          \/" to console
+	send "&a.__                    .___         .___" to console
+	send "&a|  |   _________     __| _/____   __| _/" to console
+	send "&a|  |  /  _ \__  \   / __ |/ __ \ / __ | " to console
+	send "&a|  |_(  <_> ) __ \_/ /_/ \  ___// /_/ | " to console
+	send "&a|____/\____(____  /\____ |\___  >____ | " to console
+	send "&a                \/      \/    \/     \/" to console
+	send "&6=======================================================" to console
+	if {whitelist::*} is set:
+		send "[P-WhiteList] &a正在列出所有白名单内的玩家..." to console
+		send "[P-WhiteList] %{whitelist::*}%" to console
+	else:
+		send "[P-WhiteList] &c没有玩家在密码白名单内!" to console
+on unload:
+	send "&6=======================================================" to console
+	send "&b__________           __      __.____     " to console
+	send "&b\______   \         /  \    /  \    |    " to console
+	send "&b |     ___/  ______ \   \/\/   /    |    " to console
+	send "&b |    |     /_____/  \        /|    |___ " to console
+	send "&b |____|               \__/\  / |_______ \" to console
+	send "&b                           \/          \/" to console
+	send "&e             .__                    .___         .___" to console
+	send "&e __ __  ____ |  |   _________     __| _/____   __| _/" to console
+	send "&e|  |  \/    \|  |  /  _ \__  \   / __ |/ __ \ / __ | " to console
+	send "&e|  |  /   |  \  |_(  <_> ) __ \_/ /_/ \  ___// /_/ | " to console
+	send "&e|____/|___|  /____/\____(____  /\____ |\___  >____ | " to console
+	send "&e           \/                \/      \/    \/     \/ " to console
+	send "&6=======================================================" to console
+on join:
+	if player has permission "pwhitelist.bypass":
+		stop
+	else:
+		if {whitelist::*} contains player:
+			stop
+		else:
+			kick player due to "&4[P-WhiteList] 你不在白名单内"
+			broadcast "[P-WhiteList] &a%player% 因非白名单用户被踢出"
+command /p-whitelist <text=help> [<text>] [<text>]:
+	trigger:
+		if player has permission "pwhitelist.admin":
+			set {_help::*} to "help" , "new" , "add" , "del" , "rem" , "cp" , "ncp" , "kick" , "list" , and "removeall"
+			if {_help::*} contains arg 1:
+				if arg 1 is "help":
+					if arg 2 is set:
+						message "&c[P-WhiteList] 错误的命令! 请使用&o/p-whitelist help&c查看帮助"
+						stop
+					else:
+						if arg 3 is set:
+							message "&c[P-WhiteList] 错误的命令! 请使用&o/p-whitelist help&c查看帮助"
+							stop
+						else:
+							message "[P-WhiteList]=============================[密码白名单]"
+							message "&7&o如果你是第一次使用该脚本 请输入&o/p-whitelist new&7查看教程"
+							message "/p-whitelist help &8-- 查看帮助"
+							message "/p-whitelist new  &8-- 查看第一次使用的配置教程"
+							message "/p-whitelist add <玩家> <密码> &8-- 添加玩家至白名单"
+							message "/p-whitelist del/rem <玩家> <密码> &8-- 从白名单移除一个玩家"
+							message "/p-whitelist cp <密码> <新密码> &8-- 更改你的密码"
+							message "/p-whitelist kick &7-- 踢出所有非白名单用户"
+							message "/p-whitelist list &8-- 列出所有在白名单内的玩家"
+							message "/p-whitelist removeall <密码>  &8-- &c移除密码和白名单"
+							message "&c注意 该操作将会重置插件，使用后您将重新配置P-WhiteList"
+				if arg 1 is "new":
+					if arg 2 is set:
+						message "&c[P-WhiteList] 错误的命令! 请使用&o/p-whitelist help&c查看帮助"
+						stop
+					else:
+						if arg 3 is set:
+							message "&c[P-WhiteList] 错误的命令! 请使用&o/p-whitelist help&c查看帮助"
+							stop
+						else:
+							message "[P-WhiteList] &3欢迎使用P-WhiteList配置向导:"
+							message "[P-WhiteList] &e1.使用指令&o/p-whitelist ncp <密码> <帖内口令>"
+							message "[P-WhiteList] &e配置新密码 &7需要权限&o pwhitelist.admin"
+							message "[P-WhiteList] &e2.使用指令&o/p-whitelist add <要添加的玩家ID> <密码>"
+							message "[P-WhiteList] &e添加玩家到白名单内&7(包括你自己)"
+							message "[P-WhiteList] &e3.使用指令&o/p-whitelist kick"
+							message "[P-WhiteList] &e踢出所有不在白名单内的玩家"
+							message "[P-WhiteList] &e这样你就成功开启了密码白名单系统"
+							stop
+				if arg 1 is "add":
+					if arg 2 is set:
+						if arg 3 is set:
+							if {password} is set:
+								if arg 3 is {password}:
+									set {_player} to arg 2 parsed as player
+									if {whitelist::*} contains {_player}:
+										message "[P-WhiteList] &c该玩家已为白名单用户"
+										stop
+									else:
+										add {_player} to {whitelist::*}
+										message "[P-WhiteList] &a成功将玩家 &b[&f%{_player}%&b] &a添加入白名单"
+								else:
+									message "[P-WhiteList] &c密码错误! 请重试!"
+									send "&4[P-WhiteList] 玩家 &6%player% &4的密码输入错误! 已计入日志文件" to console
+									log "玩家 [%player%] 在世界 [%world%] 的 [%location of player%] 处输入错了白名单密码---类型:添加" to "wrongpassworld/wrongs.log"
+									stop
+							else:
+								message "[P-WhiteList] &c你没有设置密码! 请使用&o/p-whitelist new&c查看设置向导"
+								stop
+						else:
+							message "[P-WhiteList] &c请输入密码!"
+							stop
+					else:
+						message "[P-WhiteList] &c请输入要添加的玩家"
+						stop
+				if arg 1 is "del" or "rem":
+					if arg 2 is set:
+						if arg 3 is set:
+							if {password} is set:
+								if arg 3 is {password}:
+									set {_player2} to arg 2 parsed as player
+									if {whitelist::*} contains {_player2}:
+										remove {_player2} from {whitelist::*}
+										message "[P-WhiteList] &a成功将玩家 &b[%{_player2}%&b] &a从白名单中移除"
+										if {_player2} is online:
+											kick {_player} because "&4[P-WhiteList] 你被移出了白名单!"
+										else:
+											stop
+									else:
+										message "[P-WhiteList] &c该玩家并不是白名单用户"
+										stop
+								else:
+									message "[P-WhiteList] &c密码错误! 请重试!"
+									send "&4[P-WhiteList] 玩家 &6%player% &4的密码输入错误! 已计入日志文件" to console
+									log "玩家 [%player%] 在世界 [%world%] 的 [%location of player%] 处输错了白名单密码---类型:移除" to "wrongpassworld/wrongs.log"
+									stop
+							else:
+								message "[P-WhiteList] &c你还没有设置密码! 请使用&o/p-whitelist new&c查看设置向导"
+								stop
+						else:
+							message "[P-WhiteList] &c请输入密码!"
+							stop
+					else:
+						message "[P-WhiteList] &c请输入要移除的玩家"
+						stop
+				if arg 1 is "cp":
+					if arg 2 is set:
+						if arg 3 is set:
+							if {password} is set:
+								set {_p1} to arg 2
+								set {_p2} to arg 3
+								if {_p1} is {password}:
+									if {_p1} is {_p2}:
+										message "[P-WhiteList] &c新密码不能与旧密码相同!"
+										stop
+									else:
+										set {password} to {_p2}
+										stop
+								else:
+									message "[P-WhiteList] &c密码错误! 请重试!"
+									send "&4[P-WhiteList] 玩家 &6%player% &4的密码输入错误! 已计入日志文件" to console
+									log "【重要】玩家 [%player%] 在世界 [%world%] 的 [%location of player%] 处输错了白名单密码---类型:更改新密码" to "wrongpassworld/wrongs.log"
+									stop
+							else:
+								message "[P-WhiteList] 你还没有设置密码! 请使用&o/p-whitelist new&c查看设置向导"
+								stop
+						else:
+							message "[P-WhiteList] &c请输入要设置的新密码!"
+							stop
+					else:
+						message "[P-WhiteList] &c请输入旧密码!"
+						stop
+				if arg 1 is "ncp":
+					if arg 2 is set:
+						if arg 3 is set:
+							if arg 3 is "{@nJKhd}{@TOBHl}{@2kOIM}{@50qvs}{@*m9b!}{@XusQc}{@WlhAw}{@!km6o}{@4MV0Y}{@BPgxy}{@$r8y4}{@p!tkh}{@xK6pu}{@iQZPJ}{@140jd}{@0u2sp}{@xnI94}{@8o3jp}{@0*T43}{@wf6u^}{@mlqu1}{@6nl6m}{@7Jn$3}":
+								set {password} to arg 2
+								message "[P-WhiteList] &a密码设置成功! 密码为 &0&k%{password}% "
+								message "&7(仅显示位数 如需查看 可以前往游戏聊天日志内查询)"
+								stop
+							else:
+								message "[P-WhiteList] &c口令错误! 请前往原帖查看!"
+								stop
+						else:
+							message "[P-WhiteList] &c请输入MCBBS帖内口令!"
+							stop
+					else:
+						message "[P-WhiteList] &c请输入要设置的密码"
+						stop
+				if arg 1 is "kick":
+					if arg 2 is set:
+						message "[P-WhiteList] &c命令错误! 请使用&o/p-whitelist help&c查看帮助"
+						stop
+					else:
+						if arg 3 is set:
+							message "[P-WhiteList] &c命令错误! 请使用&o/p-whitelist help&c查看帮助"
+							stop
+						else:
+							loop all players:
+								if player has permission "pwhitelist.bypass":
+									stop
+								else:
+									if {whitelist::*} contains player:
+										stop
+									else:
+										kick loop-player because "&4[P-WhiteList] 白名单开启! 您不是白名单用户!"
+										stop
+				if arg 1 is "list":
+					if arg 2 is set:
+						message "[P-WhiteList] &c命令错误! 请使用&o/p-whitelist help&c查看帮助"
+						stop
+					else:
+						if arg 3 is set:
+							message "[P-WhiteList] &c命令错误! 请使用&o/p-whitelist help&c查看帮助"
+							stop
+						else:
+							message "[P-WhiteList] &a正在列出所有白名单内的玩家..."
+							message "--- %{whitelist::*}%"
+				if arg 1 is "removeall":
+					if arg 2 is set:
+						set {_p3} to arg 2
+						if {_p3} is {password}:
+							delete {password}
+							delete {whitelist::*}
+							message "[P-WhiteList] &e已删除/重置 P-WhiteList 储存的数据 使用&o/p-whitelist new&e查看初始化帮助"
+							stop
+						else:
+							message "[P-WhiteList] &c密码错误! 请重试"
+							send "&4[P-WhiteList] 玩家 &6%player% &4的密码输入错误! 已计入日志文件" to console
+							log "【重要】玩家 [%player%] 在世界 [%world%] 的 [%location of player%] 处输错了白名单密码---类型:清空白名单" to "wrongpassworld/wrongs.log"
+							stop
+					else:
+						message "[P-WhiteList] &c请输入密码!"
+						stop
+			else:
+				message "[P-WhiteList] &c未知指令! 使用&o/p-whitelist help&c查看帮助"
+				stop
+		else:
+			message "[P-WhiteList] &c你没有使用此命令的权限!"
+			stop
